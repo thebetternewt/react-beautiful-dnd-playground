@@ -4,13 +4,12 @@ import { Draggable } from 'react-beautiful-dnd';
 
 const Task = ({ task, index }) => {
   // const isDragDisabled = task.id === 'task-1';
-  const isDragDisabled = false;
 
   return (
     <Draggable
       draggableId={task.id}
       index={index}
-      isDragDisabled={isDragDisabled}
+      // isDragDisabled={isDragDisabled}
     >
       {(provided, snapshot) => (
         <Container
@@ -18,10 +17,9 @@ const Task = ({ task, index }) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           isDragging={snapshot.isDragging}
-          isDragDisabled={isDragDisabled}
+          // isDragDisabled={isDragDisabled}
         >
-          {/* <Handle {...provided.dragHandleProps} /> */}
-          {task.content}
+          {task.content[0]}
         </Container>
       )}
     </Draggable>
@@ -29,26 +27,27 @@ const Task = ({ task, index }) => {
 };
 
 const Container = styled.div`
-  margin-bottom: 8px;
   border: 1px solid lightgray;
-  border-radius: 2px;
+  border-radius: 50%;
   padding: 8px;
+  margin-right: 8px;
   background-color: ${props =>
     props.isDragDisabled
       ? 'lightgray'
       : props.isDragging
       ? 'yellow'
       : 'lightcyan'};
+  width: 40px;
+  height: 40px;
 
   display: flex;
-`;
+  justify-content: center;
+  align-items: center;
 
-// const Handle = styled.div`
-//   width: 20px;
-//   height: 20px;
-//   background-color: orangered;
-//   border-radius: 4px;
-//   margin-right: 0.5rem;
-// `;
+  &:focus {
+    outline: none;
+    border-color: red;
+  }
+`;
 
 export default Task;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 import { initialData } from '../initial-data';
 
-import Task from './Task';
+import Task from './HorizontalTask';
 
 const Column = ({ column, tasks, isDropDisabled = true }) => {
   return (
@@ -13,6 +13,7 @@ const Column = ({ column, tasks, isDropDisabled = true }) => {
         droppableId={column.id}
         // type={column.id === 'column-3' ? 'done' : 'active'}
         isDropDisabled={isDropDisabled}
+        direction="horizontal"
       >
         {(provided, snapshot) => (
           <TaskList
@@ -49,10 +50,12 @@ const TaskList = styled.div`
   transition: background-color 0.2s ease;
   background-color: ${({ isDraggingOver }) =>
     isDraggingOver ? '#ddd' : 'white'};
-  flex-grow: 1;
+  /* flex-grow: 1; */
 
   /* Make sure that if all lists are empty, there is still a droppable area for tasks. */
-  min-height: 100px;
+  /* min-height: 100px; */
+
+  display: flex;
 `;
 
 export default Column;
